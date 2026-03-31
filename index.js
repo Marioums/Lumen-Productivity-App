@@ -44,13 +44,44 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 });
 
+function getLocalDateStr(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
 
 const today = new Date();
-const todayStr = today.toISOString().split('T')[0];
+const todayStr = getLocalDateStr(today); 
 
 const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
-const tomorrowStr = tomorrow.toISOString().split('T')[0];
+const tomorrowStr = getLocalDateStr(tomorrow); 
+
+const dateDisplay = document.querySelector(".date-display"); 
+const greeting = document.getElementById("greeting"); 
+
+function updateDateTime(){
+    const date = new Date(); 
+    const time = date.getHours(); 
+    
+    if(time >=5 && time < 12){
+        greeting.textContent = "Good Morning"; 
+    } else if(time >=12 && time < 17)
+        greeting.textContent = "Good Afternoon"; 
+    else {
+        greeting.textContent = "Good Evening"
+    }
+
+    const options = {
+        weekday: 'long', 
+        month: 'long',  
+        day: 'numeric'   
+    };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    dateDisplay.textContent = formattedDate; 
+}
+
 
 let tasksBadge = document.querySelector(".tasks-card .badge");
 let tasksList = document.getElementById("dashboardTasks"); 
@@ -482,13 +513,14 @@ function filterExams(filter) {
 
 function calculateDaysLeft(examDate) {
     const today = new Date();
-    const exam = new Date(examDate);
-    
     today.setHours(0, 0, 0, 0);
-    exam.setHours(0, 0, 0, 0);
     
+    const [year, month, day] = examDate.split('-');
+    const exam = new Date(year, month - 1, day);
+    exam.setHours(0, 0, 0, 0);
+
     const differenceInmilliSeconds = exam - today; 
-    const differenceInDays = Math.ceil(differenceInmilliSeconds / (1000 * 60 * 60 * 24));
+    const differenceInDays = Math.round(differenceInmilliSeconds / (1000 * 60 * 60 * 24));
     return differenceInDays;
 }
 
@@ -1372,6 +1404,23 @@ function resetTimer(){
     updateProgress();
 }
 
+function clearOldSessions() {
+    const oldCount = sessions.length;
+    
+    sessions = sessions.filter(session => session.date === todayStr);
+    
+    if (sessions.length !== oldCount) {
+        sessionCount = sessions.length;
+        totalTime = 0;
+        sessions.forEach(session => {
+            totalTime += session.duration;
+        });
+        renderHistory();
+        updateStats();
+        savePomodoro();
+    }
+}
+
 function sessionComplete(){
     if(timer)
         clearInterval(timer); 
@@ -1388,7 +1437,8 @@ function sessionComplete(){
 
     const newSession = {
         time: timeString,
-        duration: focusTime
+        duration: focusTime, 
+        date: todayStr
     };
 
     sessions.push(newSession);
@@ -1602,12 +1652,9 @@ function loadPomodoro(){
     const storedPomodoro = localStorage.getItem("sessions");
     if (storedPomodoro) {
         sessions = JSON.parse(storedPomodoro);
-        sessionCount = sessions.length; 
-        totalTime = 0;
-        sessions.forEach(session => {
-            totalTime += session.duration;
-        });
+        clearOldSessions();  
     }
+
     renderHistory(); 
     updateStats(); 
     updateTimerDisplay(timeRemaining); 
@@ -1818,6 +1865,7 @@ window.addEventListener("DOMContentLoaded", () => {
         pomodoroPageLink.click();  
     });
 
+    updateDateTime(); 
 
     loadTasks();
     updateTasksCount(); 
@@ -1834,4 +1882,9 @@ window.addEventListener("DOMContentLoaded", () => {
     updateCharCount(); 
 
     loadPomodoro(); 
+    document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+            clearOldSessions();
+        }
+    });
 });
