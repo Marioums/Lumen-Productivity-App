@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Lumen</title>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1><i class="fas fa-lightbulb"></i> Lumen</h1>
+                <p class="tagline">Study tools, illuminated</p>
+            </div>
+
+            <nav class="nav">
+                <a href="#" class="nav-item active" data-page="dashboard-page">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="tasks-page">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </a>
+                <a href="#" class="nav-item" data-page="exams-page">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>Exams</span>
+                </a>
+                <a href="#" class="nav-item" data-page="pomodoro-page">
+                    <i class="fas fa-clock"></i>
+                    <span>Pomodoro</span>
+                </a>
+                <a href="#" class="nav-item" data-page="gpa-page">
+                    <i class="fas fa-calculator"></i>
+                    <span>GPA Calculator</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div id="dashboard-page" class="page active">
+                <header class="header">
+                    <div class="greeting">
+                        <h2>Hello, <span class="user-name">Mariam</span>👋</h2>
+                        <p class="date-display">Monday, November 18</p>
+                    </div>
+                </header>
+
+                <div class="cards-grid">
+                    <div class="card exam-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-alt"></i> Upcoming Exams</h3>
+                            <span class="badge" id="exams-badge">0</span>
+                        </div>
+                    
+                        <div class="card-content">
+                            <div class="no-exams-message-dashboard hidden" id="no-exams-dashboard">
+                                <i class="fas fa-calender-times"></i>
+                                <h4>No exams scheduled</h4>
+                                <p>Add your first exam to start tracking! </p>
+                            </div>
+                            
+                            <div id="dashboardExams">
+                                <!-- data will be added here -->
+                            </div> 
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="#" id="goToExamsPage" >view all exams <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="card tasks-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-tasks"></i> Due soon</h3>
+                            <span class="badge">4</span>
+                        </div>
+
+                        <div class="card-content" id="tasksList-dashboard">
+                            <div class="no-tasks-message-dashboard hidden" id="no-tasks-dashboard">
+                                <i class="fas fa-clipboard-list"></i>
+                                <h4>No tasks yet</h4>
+                                <p>Add your first task to get started!</p>
+                            </div>
+                            
+                            <div id="dashboardTasks">
+                                <!-- data will be added here -->
+                            </div>         
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="#" id="goToTaskPage">view all tasks <i class="fas fa-arrow-right"></i> </a>
+                        </div>
+                    </div>
+
+                    <div class="card pomodoro-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-clock"></i> Pomodoro Timer</h3>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="timer-display">25:00</div>
+                            
+                            <div class="timer-controls">
+                                <button class="timer-btn start-btn" id="dashboard-start-btn">
+                                    <i class="fas fa-play"></i> Start Focus
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="#" id="goToPomodoroPage"><i class="fas fa-clock"> </i> Customize timer </a>
+                        </div>
+                    </div>
+
+                    <div class="card notes-card">
+                        <div class="card-header">
+                            <h3> <i class="fas fa-sticky-note"></i> Quick Notes </h3>
+                        </div>
+
+                        <div class="card-content">
+                            <textarea class="notes-textarea" placeholder="Type your quick notes here..."></textarea>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="notes-stat">
+                                <span class="char-count"> <i class="fas fa-keyboard"></i> 0</span>
+                                <span class="auto-save"> <i class="fas fa-sync-alt"></i> Auto-saved</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card gpa-card">
+                        <div class="card-header">
+                            <h3> <i class="fas fa-award"></i> Current CGPA </h3>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="gpa-display">
+                                <div class="gpa-main">
+                                    <span class="gpa-value" id="CGPA-value"> 0.0</span>
+                                    <span class="gpa-label"> CGPA</span>
+                                </div>
+
+                                <div class="gpa-details">
+                                    <div class="gpa-detail">
+                                        <span class="detail-label"> MCGPA</span>
+                                        <span class="detail-value" id="MCGPA-value"> 0.0</span>
+                                    </div>
+                                    <div class="gpa-detail">
+                                        <span class="detail-label" > Total Credits</span>
+                                        <span class="detail-value" id="total-credits-value"> 0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="#" id="goToGPAPage"> <i class="fas fa-calculator" ></i> <strong>Calculate GPA</strong> </a>
+                        </div>
+                    </div>
+
+                    <div class="card hours-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> Weekly Focus</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="coming-soon">
+                                <i class="fas fa-chart-simple"></i>
+                                <p>Coming soon! Track your weekly focus time.</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p>Stay tuned for updates!</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- ------------------------------------Tasks Page--------------------------------------- -->
+            <div id="tasks-page" class="page ">
+                <header class="header">
+                    <div class="greeting">
+                        <h2>All Tasks <span class="task-count">(12)</span> </h2>
+                        <p class="date-display">Manage your to-do list</p>
+                    </div>
+                    <button class="primary-btn" id="add-task-btn">
+                        <i class="fas fa-plus"></i>Add New Task
+                    </button>
+                </header>
+
+                <div class="tasks-container">
+                    <div class="task-filters">
+                        <div class="filter-buttons" id="filters">
+                            <button class="filter-btn active" data-filter="all">All Tasks</button>
+                            <button class="filter-btn" data-filter="pending">Pending</button>
+                            <button class="filter-btn" data-filter="completed">Completed</button>
+                        </div>
+                    </div>
+
+                    <div class="tasks-list">
+                        <div class="task-list-header">
+                            <h3> <i class="fas fa-list"></i> Task List</h3>
+                            <span class="tasks-found" id="tasks-found">4 tasks found</span>
+                        </div>
+
+                        <div class="tasks-list-content">
+                            <div class="no-tasks-message hidden" id="no-tasks">
+                                <i class="fas fa-clipboard-list"></i>
+                                <h4>No tasks yet</h4>
+                                <p>Add your first task to get started!</p>
+                            </div>
+
+                            <div class="tasks-table" id="tasks-table">
+                                 <div class="tasks-table-header hidden" id="tasks-table-header">
+                                    <div class="col-status">Completed</div>
+                                    <div class="col-task">Task</div>
+                                    <div class="col-notes">Notes</div>
+                                    <div class="col-due">Due Date</div>
+                                    <div class="col-action">Delete</div>
+                                 </div>
+
+                                 <div id="task-rows-container">
+
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="add-task-form hidden">
+                        <div class="form-header">
+                            <h3 id="add-task"><i class="fas fa-plus-circle"></i> Add New Task</h3>
+                            <!-- <button class="close-form-btn">
+                                <i class="fas fa-times"></i>
+                            </button> -->
+                        </div>
+                        <form action="" id="task-form">
+                            <div class="form-group">
+                                <label for="task-title"><i class="fas fa-pen"></i> Task Title</label>
+                                <input type="text" id="task-title" placeholder="What needs to be done?" required>
+                            </div>
+
+                            <div class="form-group">
+                                    <label for="due-date"><i class="fas fa-calendar"></i> Due Date</label>
+                                    <input type="date" id="due-date" required>
+                                </div>
+
+
+                            <div class="form-group">
+                                <label for="task-notes"><i class="fas fa-sticky-note"></i> Notes (Optional)</label>
+                                <textarea id="task-notes" placeholder="Add any additional details..." rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="secondary-btn cancel-btn" id="cancel-form">Cancel</button>
+                                <button type="submit" class="primary-btn" id="save-task">
+                                    <i class="fas fa-save"></i> Save Task
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+<!-- ------------------------------------------ Exams Page ----------------------------------------- -->
+            <div id="exams-page" class="page">
+                <header class="header">
+                    <div class="greeting">
+                        <h2>Upcoming Exams <span class="exam-count" id="exam-count">(3)</span></h2>
+                        <p class="date-display">Track your exam schedule</p>
+                    </div>
+                    <button class="primary-btn" id="add-exam-btn">
+                        <i class="fas fa-plus"></i> Add New Exam
+                    </button>
+                </header>
+
+                <div class="exams-container">
+                    <div class="exams-filters">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="upcoming">Upcoming</button>
+                            <button class="filter-btn" data-filter="past">Past Exams</button>
+                        </div>
+                    </div>
+
+                    <div class="exams-list">
+                        <div class="exams-list-header">
+                            <h3><i class="fas fa-calendar-check"></i> Exam Schedule</h3>
+                            <span class="exams-found" id="exams-found">0 exams found</span>
+                        </div>
+
+                        <div class="exams-list-content">
+                            <div class="no-exams-message hidden" id="no-exams">
+                                <i class="fas fa-calendar-times"></i>
+                                <h4>No exams scheduled</h4>
+                                <p>Add your first exam to start tracking!</p>
+                            </div>
+
+                            <div class="exams-table" id="exams-table">
+                                <div class="exams-table-header hidden" id="exams-table-header">
+                                    <div class="col-subject">Exam</div>
+                                    <div class="col-date">Date</div>
+                                    <div class="col-days">Days Left</div>
+                                    <div class="col-actions">Actions</div>
+                                </div>
+
+                                <div id="exam-rows-container">
+                                    <!-- Exam rows will be added here dynamically -->
+                                    <!-- <div class="exam-row">
+                                        <div class="exam-main">
+                                            <div class="col-subject">
+                                                <strong>Math Final</strong>
+                                                <span class="exam-type-badge">Final</span>
+                                            </div>
+                                            <div class="col-date">Nov 25, 2024</div>
+                                            <div class="col-days urgent">3 days left</div>
+                                            <div class="col-actions">
+                                                <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="exam-expanded">
+                                            <div class="expanded-detail"><i class="fas fa-clock"></i> 10:00 AM</div>
+                                            <div class="expanded-detail"><i class="fas fa-map-marker-alt"></i> Room 301, Building A</div>
+                                            <div class="expanded-detail"><i class="fas fa-sticky-note"></i> Bring calculator, formula sheet, and ID</div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="add-exam-form hidden">
+                        <div class="form-header">
+                            <h3><i class="fas fa-plus-circle"></i> Add New Exam</h3>
+                        </div>
+
+                        <form action="" class="exam-form">
+                            <div class="form-group">
+                                <label for="exam-subject"><i class="fas fa-book"></i> Subject</label>
+                                <input type="text" id="exam-subject" placeholder="e.g., Mathematics, Computer Science" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="exam-date"><i class="fas fa-calendar"></i> Exam Date</label>
+                                    <input type="date" id="exam-date" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exam-time"><i class="fas fa-clock"></i> Time (Optional)</label>
+                                    <input type="time" id="exam-time">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="exam-location"><i class="fas fa-map-marker-alt"></i> Location (Optional)</label>
+                                    <input type="text" id="exam-location" placeholder="e.g., Room 301, Building A">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exam-type"><i class="fas fa-file-alt"></i> Type</label>
+                                    <select id="exam-type" required>
+                                        <option value="disabled selected">Select an exam type</option>
+                                        <option value="final">Final Exam</option>
+                                        <option value="midterm">Midterm</option>
+                                        <option value="quiz">Quiz</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exam-notes"><i class="fas fa-sticky-note"></i> Notes (Optional)</label>
+                                <textarea id="exam-notes" placeholder="Important details, topics to focus on, what to bring..." rows="3"></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="secondary-btn cancel-btn" id="cancel-exam">Cancel</button>
+                                <button type="submit" class="primary-btn" id="save-exam">
+                                    <i class="fas fa-save"></i> Save Exam
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- ---------------Pomodoro Page------------- -->
+            <div id="pomodoro-page" class="page">
+                <header class="header">
+                    <div class="greeting">
+                        <h2>Pomodoro Timer</h2>
+                        <p class="date-display">Your productivity focus session starts here! </p>
+                    </div>
+                </header>
+
+                <div class="pomodoro-container">
+                    <div class="timer-card">
+                        <div class="mode-toggle">
+                            <button class="mode-btn focus active" id="focus-mode">Focus</button>
+                            <button class="mode-btn break" id="break-mode">Break</button>
+                        </div>
+
+                        <div class="timer">25:00</div>
+
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="timer-actions">
+                            <button class="action-btn start" id="start-btn">Start</button>
+                            <button class="action-btn pause" id="pause-btn" disabled>Pause</button>
+                            <button class="action-btn reset" id="reset-btn">Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="settings-row">
+                            <div class="setting">
+                                <label>Focus Duration</label>
+                                <div class="setting-control">
+                                    <button class="set-btn" id="focus-down-btn" data-type="focus" data-dir="down">−</button>
+                                    <span id="focus-minutes">25</span>
+                                    <button class="set-btn" id="focus-up-btn" data-type="focus" data-dir="up">+</button>
+                                    <span class="minutesLabel">min</span>
+                                </div>
+                            </div>
+                            <div class="setting">
+                                <label>Break Duration</label>
+                                <div class="setting-control">
+                                    <button class="set-btn" id="break-down-btn" data-type="break" data-dir="down">−</button>
+                                    <span id="break-minutes">5</span>
+                                    <button class="set-btn" id="break-up-btn" data-type="break" data-dir="up">+</button>
+                                    <span class="minutesLabel">min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-header">
+                            <h3><i class="fas fa-history"></i> Today's Sessions</h3>
+                            <div class="history-stats">
+                                <span id="total-sessions">0 sessions</span>
+                                <span id="total-focus">0 min</span>
+                            </div>
+                        </div>
+                        <div class="history-list">
+                            <div class="empty-history">
+                                <i class="fas fa-hourglass-half"></i>
+                                <p>No sessions yet</p>
+                            </div>
+
+                            <div class="sessions-list">
+                                <!-- Completed sessions will be added here  -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ---------------GPA Calculator Page------------- -->
+            <div id="gpa-page" class="page hidden">
+                <header class="header">
+                    <div class="greeting">
+                        <h2>GPA Calculator</h2>
+                        <p class="date-display">Track your grades across all semesters</p>
+                    </div>
+                </header>
+
+                <div class="gpa-container">
+                    <!-- GPA Results Display -->
+                    <div class="gpa-results-card">
+                        <div class="results-header">
+                            <h3><i class="fas fa-chart-line"></i> GPA Results</h3>
+                            <button class="secondary-btn" id="clear-all-btn">
+                                <i class="fas fa-trash" id="clearAllData"></i> Clear All Data
+                            </button>
+                        </div>
+                        
+                        <div class="results-content">
+                            <div class="gpa-results-grid">
+                                <div class="gpa-result-box">
+                                    <div class="gpa-result-label">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Semester GPA</span>
+                                    </div>
+                                    <div class="gpa-result-value" id="semester-gpa">0.00</div>
+                                </div>
+                                
+                                <div class="gpa-result-box">
+                                    <div class="gpa-result-label">
+                                        <i class="fas fa-chart-bar"></i>
+                                        <span>Cumulative GPA</span>
+                                    </div>
+                                    <div class="gpa-result-value" id="cumulative-gpa">0.00</div>
+                                </div>
+                                
+                                <div class="gpa-result-box">
+                                    <div class="gpa-result-label">
+                                        <i class="fas fa-award"></i>
+                                        <span>Major GPA</span>
+                                    </div>
+                                    <div class="gpa-result-value" id="major-gpa">0.00</div>
+                                </div>
+                                
+                                <div class="gpa-result-box">
+                                    <div class="gpa-result-label">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        <span>Total Credits</span>
+                                    </div>
+                                    <div class="gpa-result-value" id="total-credits">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="courses-input-card">
+                        <div class="input-header">
+                            <div class="semester-selector-section">
+                                <label for="semester-select"><i class="fas fa-layer-group"></i> Current Semester:</label>
+                                <select id="semester-select" class="semester-dropdown">
+
+                                </select>
+                            </div>
+                            <div class="semester-actions">
+                                <button class="secondary-btn" id="save-semester-btn">
+                                    <i class="fas fa-save"></i> Save Current
+                                </button>
+                                <button class="secondary-btn" id="new-semester-btn">
+                                    <i class="fas fa-plus"></i> New Semester
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="current-semester-stats">
+                            <div class="stat-chip">
+                                <i class="fas fa-calculator"></i> Semester GPA: <strong id="current-gpa">0.00</strong>
+                            </div>
+                            <div class="stat-chip">
+                                <i class="fas fa-chart-line"></i> Credits: <strong id="current-credits">0</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="courses-table-container">
+                            <table class="courses-table">
+                                <thead>
+                                    <tr>
+                                        <th>Course Name</th>
+                                        <th>Credits</th>
+                                        <th>Grade</th>
+                                        <th>Major Course</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="courses-table-body">
+                                    <!-- Courses added here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="table-actions">
+                            <button class="secondary-btn" id="add-course-btn">
+                                <i class="fas fa-plus"></i> Add Course
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="saved-semesters-card">
+                        <div class="saved-header">
+                            <h3><i class="fas fa-history"></i> Saved Semesters</h3>
+                        </div>
+                        
+                        <div class="saved-semesters-list">
+                        <!-- Saved semesters will be added here  -->
+                            <div class="no-saved-message" id="no-saved-semesters">
+                                <i class="fas fa-inbox"></i>
+                                <h4>No saved semesters yet</h4>
+                                <p>Create a new semester to get started!</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <footer class="footer">
+            <p>© 2026 Lumen. All rights reserved. Developed by Mariam Sfaxi</p>
+        </footer>
+        </main>
+
+    </div>
+    <script src="index.js"> </script>
+</body>
+</html>
