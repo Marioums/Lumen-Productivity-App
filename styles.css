@@ -626,7 +626,7 @@ body{
 }
 
 .no-tasks-message-dashboard i{
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: var(--space-md);
     color: var(--bg-color);
 }
@@ -1094,6 +1094,37 @@ body{
 }
 
 .no-exams-message.hidden{
+    display: none;
+}
+
+
+.no-exams-message-dashboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--secondary-text);
+}
+
+.no-exams-message-dashboard i{
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+    color: var(--bg-color);
+}
+
+.no-exams-message-dashboard h4{
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+    color: var(--secondary-text);
+}
+
+.no-exams-message-dashboard p{
+    color: var(--secondary-text);
+    opacity: 0.7;
+}
+
+.no-exams-message-dashboard.hidden{
     display: none;
 }
 
