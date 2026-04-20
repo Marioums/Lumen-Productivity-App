@@ -2054,17 +2054,14 @@ body{
     }
 
     .tasks-table, 
-    .exams-table, 
-    .courses-table-container { 
+    .exams-table { 
         overflow-x: auto; 
         display: block; 
     }
 
-    .courses-table {
-        min-width: 0;
-        width: 100%;
-        max-width: 100%;
-        table-layout: fixed;
+    .courses-table-container { 
+        overflow-x: visible; 
+        display: block; 
     }
 
     .tasks-table-header, 
@@ -2156,6 +2153,7 @@ body{
         width: 100%;
     }
 
+    /* Course Cards - Stack labels on top for mobile */
     .courses-table-container {
         overflow-x: visible;
     }
@@ -2176,33 +2174,59 @@ body{
     .courses-table tr {
         background: var(--bg-color);
         border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin-bottom: var(--space-md);
+        padding: var(--space-sm);
+        margin-bottom: var(--space-sm);
         border: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .courses-table td {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: var(--space-xs) 0;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 0;
         border-bottom: none;
-        gap: var(--space-sm);
+        gap: 4px;
     }
 
     .courses-table td::before {
         content: attr(data-label);
         font-weight: 600;
         color: var(--secondary-text);
-        width: 35%;
-        flex-shrink: 0;
+        width: 100%;
+        margin-bottom: 4px;
+        font-size: 0.8rem;
     }
 
     .courses-table td input,
     .courses-table td select {
-        width: 35%;
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 0.9rem;
     }
 
+    /* Major Checkbox - row layout */
+    .major-checkbox {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+
+    .major-checkbox::before {
+        content: "Major Course";
+        font-weight: 600;
+        color: var(--secondary-text);
+        width: auto;
+        margin-bottom: 0;
+    }
+
+    .major-checkbox input {
+        width: auto;
+        margin: 0;
+    }
+
+    /* Actions Cell - centered button */
     .courses-table td.course-actions {
         display: block !important;
         width: 100% !important;
@@ -2213,31 +2237,6 @@ body{
         display: block !important;
         width: 100% !important;
         text-align: center !important;
-    }
-
-    .major-checkbox {
-        align-items: center;
-        width: 100%;
-        text-align: left !important;
-    }
-
-    .major-checkbox::before {
-        content: "Major Course";
-        font-weight: 600;
-        color: var(--secondary-text);
-        width: 35%;
-        flex-shrink: 0;
-    }
-
-    .major-checkbox input {
-        width: 35%;
-        margin: 0;
-        text-align: left;
-    }
-
-    .major-checkbox input {
-        width: auto;
-        margin-left: auto;
     }
 
     .remove-course-btn {
@@ -2258,6 +2257,7 @@ body{
         font-size: 0.85rem;
     }
 
+    /* Saved Semesters */
     .saved-semester-item {
         width: 100%;
         overflow-x: auto;
@@ -2292,6 +2292,51 @@ body{
         flex-wrap: wrap;
     }
 }
+
+@media (max-width: 480px) {
+    .main-content { 
+        padding: var(--space-sm); 
+    }
+
+    .card { 
+        padding: var(--space-md); 
+    }
+
+    .card-header h3 { 
+        font-size: 1rem; 
+    }
+
+    .timer { 
+        font-size: 2.5rem; 
+    }
+
+    .progress-bar { 
+        width: 100%; 
+    }
+
+    .tasks-table-header, 
+    .task-row { 
+        grid-template-columns: 35px 1fr 60px 40px; 
+        font-size: 0.7rem; 
+    }
+
+    .exams-table-header, 
+    .exam-main { 
+        grid-template-columns: 1fr 60px 50px 40px; 
+        font-size: 0.65rem; 
+    }
+
+    .col-days { 
+        font-size: 0.7rem; 
+        padding: 2px 4px; 
+    }
+
+    .due-badge { 
+        font-size: 0.65rem; 
+        padding: 2px 4px; 
+    }
+}
+
 
 @media (max-width: 480px) {
     .main-content { 
