@@ -907,6 +907,7 @@ function renderCourses(){
         courseRow.classList.add("course-row"); 
 
         const nameCell = document.createElement("td"); 
+        nameCell.setAttribute('data-label', 'Course Name');
         const courseName = document.createElement("input"); 
         courseName.classList.add("course-name"); 
         courseName.type = "text"; 
@@ -926,6 +927,7 @@ function renderCourses(){
         nameCell.appendChild(courseName);
 
         const creditsCell = document.createElement("td"); 
+        creditsCell.setAttribute('data-label', 'Credits');
         const courseCredits = document.createElement("input"); 
         courseCredits.classList.add("course-credits"); 
         courseCredits.type = "number"; 
@@ -941,6 +943,7 @@ function renderCourses(){
         creditsCell.appendChild(courseCredits);
 
         const gradeCell = document.createElement("td"); 
+        gradeCell.setAttribute('data-label', 'Grade');
         const courseGrade = document.createElement("select"); 
         courseGrade.classList.add("course-grade");
         
@@ -983,6 +986,7 @@ function renderCourses(){
         
 
         const majorCell = document.createElement("td"); 
+        majorCell.setAttribute('data-label', 'Major Course');
         majorCell.classList.add("major-checkbox"); 
         const majorCheckbox = document.createElement("input"); 
         majorCheckbox.classList.add("course-major"); 
@@ -996,6 +1000,7 @@ function renderCourses(){
         majorCell.appendChild(majorCheckbox); 
 
         const actionsCell = document.createElement("td"); 
+        actionsCell.setAttribute('data-label', '');
         actionsCell.classList.add("course-actions"); 
         const removeCourseBtn = document.createElement("button"); 
         removeCourseBtn.classList.add("remove-course-btn"); 
