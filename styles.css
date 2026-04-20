@@ -34,6 +34,11 @@
     font-family: "inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
 body{
     background-color: var(--bg-color);
     color: var(--primary-text);
@@ -59,6 +64,39 @@ body{
     transform: translateY(0);
 }
 
+.mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1001;
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: var(--card-shadow);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+
 .sidebar{
     width: 240px;
     background-color: var(--card-color);
@@ -69,6 +107,7 @@ body{
     height: 100vh;
     position: sticky;
     top: 0;
+    flex-shrink: 0;
 }
 
 .logo{
@@ -126,9 +165,10 @@ body{
 }
 
 .main-content{
+    min-width: 0;
     flex-grow: 1;
     padding: var(--space-xl);
-    max-width: calc(100%-240px);
+    width: calc(100%-240px);
 }
 
 .header{
@@ -427,17 +467,6 @@ body{
     font-size: 0.8rem;
 }
 
-@media (max-width: 1200px){
-    .notes-textarea{
-        height: 240px;
-    }
-}
-
-@media (max-width: 900px){
-    .notes-textarea{
-        height: 220px;
-    }
-}
 
 .gpa-display{
     display: flex;
@@ -832,63 +861,7 @@ body{
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-@media (max-width: 1200px) {
-    .task-filters {
-        flex-direction: column;
-        align-items: stretch;
-        gap: var(--space-md);
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-}
 
-@media (max-width: 900px) {
-    .filter-buttons {
-        flex-wrap: wrap;
-    }
-    
-    .filter-btn {
-        flex: 1;
-        min-width: 120px;
-        text-align: center;
-    }
-
-    .tasks-table-header,
-    .task-row {
-        grid-template-columns: 110px 1fr 1fr 80px 40px;
-        padding-left: 0;
-        font-size: 0.85rem;
-        gap: 4px;
-        width: 100%;
-    }
-    
-    .due-badge {
-        font-size: 0.7rem;
-        padding: 2px 6px;
-    }
-    
-    .notes-preview {
-        max-width: 120px;
-    }
-}
-
-
-@media (max-width: 600px) {
-    .tasks-table-header,
-    .task-row {
-        grid-template-columns: 30px 1fr 60px 30px;
-    }
-    
-    .col-notes {
-        display: none;
-    }
-    
-    .tasks-table-header .col-notes {
-        display: none;
-    }
-}
 
 /*------------------------------ Exams page-------------------------------  */
 .exams-container{
@@ -1140,28 +1113,6 @@ body{
     display: none;
 }
 
-@media (max-width: 1200px) {
-    .exams-filters {
-        flex-direction: column;
-        align-items: stretch;
-        gap: var(--space-md);
-    }
-}
-
-@media (max-width: 900px) {
-    .exams-table-header,
-    .exam-main {
-        grid-template-columns: 1fr 80px 70px 60px;
-        font-size: 0.8rem;
-        gap: 4px;
-    }
-    
-    .col-subject {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-}
 
 
 /* -------------------------------------Pomodoro Page---------------------------------- */
@@ -1493,36 +1444,6 @@ body{
     font-feature-settings: "tnum";
 }
 
-@media (max-width: 700px) {
-    .timer {
-        font-size: 3.5rem;
-    }
-    
-    .timer-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .action-btn {
-        width: 100%;
-        max-width: 200px;
-    }
-    
-    .progress-bar {
-        width: 90%;
-    }
-    
-    .settings-row {
-        flex-direction: column;
-        align-items: center;
-        gap: var(--space-md);
-    }
-    
-    .history-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
 
 
 /* -------------------------------------GPA Page---------------------------------- */
@@ -2006,88 +1927,6 @@ body{
     color: var(--accent-blue);
     font-size: 1.1rem;
 }
-@media (max-width: 1200px) {
-    .gpa-results-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
-    .results-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-md);
-    }
-    
-    .input-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .semester-selector-section {
-        justify-content: space-between;
-    }
-    
-    .semester-actions {
-        justify-content: flex-end;
-    }
-    
-    .table-actions {
-        flex-direction: column;
-    }
-    
-    .semester-gpa-display {
-        gap: var(--space-sm);
-    }
-    
-    .semester-gpa {
-        font-size: 1.2rem;
-    }
-    
-    .semester-credits {
-        font-size: 0.75rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .gpa-results-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .gpa-result-value {
-        font-size: 2.5rem;
-    }
-    
-    .semester-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-sm);
-    }
-    
-    .semester-gpa-display {
-        align-self: flex-end;
-    }
-    
-    .saved-semester-item {
-        margin-bottom: var(--space-sm);
-    }
-    
-    .semester-courses-header,
-    .semester-course {
-        grid-template-columns: 1.5fr 0.8fr 0.8fr;
-        font-size: 0.85rem;
-        gap: 4px;
-    }
-        .semester-gpa-summary {
-        justify-content: flex-start;
-        gap: var(--space-md);
-        flex-wrap: wrap;
-    }
-    
-    .summary-value {
-        font-size: 1rem;
-    }
-}
 
 .footer {
     margin-top: var(--space-xl);
@@ -2100,4 +1939,241 @@ body{
 
 .footer i {
     margin: 0 2px;
+}
+
+
+
+@media (max-width: 1024px) {
+    .cards-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: var(--space-md); 
+    }
+
+    .sidebar { 
+        width: 200px; 
+    }
+
+    .main-content { 
+        padding: var(--space-lg); 
+        width: calc(100% - 200px); 
+    }
+    .greeting h2 { 
+        font-size: 1.5rem; 
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+    .nav-item{
+        font-size: 0.9rem;
+    }
+
+    .nav-item i{
+        width: 20px;
+        text-align: center;
+        justify-content: center;
+        font-size: 0.95rem;
+    }
+    
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+    }
+
+    .sidebar { 
+        position: fixed; 
+        left: 0; 
+        top: 0; 
+        transform: translateX(-100%); 
+        width: 280px; 
+        z-index: 1000; 
+        transition: transform 0.3s ease; 
+    }
+
+    .sidebar.open { 
+        transform: translateX(0); 
+    }
+
+    .main-content { 
+        width: 100%; 
+        padding: var(--space-md); 
+        margin-top: 60px; 
+    }
+
+    .cards-grid { 
+        grid-template-columns: 1fr; 
+    }
+
+    .greeting h2 { 
+        font-size: 1.25rem; 
+    }
+
+    .timer-display { 
+        font-size: 2rem; 
+    }
+    
+    .gpa-value { 
+        font-size: 2.5rem; 
+    }
+
+    .gpa-details { 
+        flex-direction: column; 
+        gap: var(--space-sm); 
+    }
+
+    .primary-btn, 
+    .secondary-btn { 
+        width: 100%; 
+        justify-content: center; 
+    }
+
+    .task-filters { 
+        flex-direction: column; 
+        align-items: stretch; 
+    }
+
+    .filter-buttons { 
+        flex-wrap: wrap; 
+    }
+
+    .filter-btn { 
+        flex: 1; 
+        text-align: center; 
+    }
+
+    .tasks-table, 
+    .exams-table, 
+    .courses-table-container { 
+        overflow-x: auto; 
+        display: block; 
+    }
+
+    .timer { 
+        font-size: 3rem; 
+    }
+
+    .timer-actions { 
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .action-btn { 
+        width: 100%; 
+        max-width: 200px; 
+    }
+
+    .settings-row { 
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .history-header { 
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    .gpa-results-grid { 
+        grid-template-columns: 1fr; 
+    }
+
+    .semester-header { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: var(--space-sm); 
+    }
+
+    .semester-gpa-display { 
+        align-self: flex-end; 
+    }
+
+    .input-header { 
+        flex-direction: column; 
+        align-items: stretch; 
+    }
+
+    .semester-selector-section { 
+        flex-direction: column; 
+        align-items: stretch; 
+        gap: var(--space-sm); 
+    }
+
+    .semester-actions { 
+        flex-direction: column; 
+    }
+
+    .tasks-table-header, 
+    .task-row { 
+        grid-template-columns: 40px 1fr 70px 50px; 
+        font-size: 0.75rem; 
+        gap: 4px; 
+    }
+
+    .col-notes, 
+    .tasks-table-header .col-notes { 
+        display: none; 
+    }
+
+    .exams-table-header, 
+    .exam-main { 
+        grid-template-columns: 1fr 70px 60px 50px; 
+        font-size: 0.7rem; 
+        gap: 4px; 
+    }
+
+    .col-subject { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 4px; 
+    }
+
+    .exam-type-badge { 
+        font-size: 0.6rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content { 
+        padding: var(--space-sm); 
+    }
+
+    .card { 
+        padding: var(--space-md); 
+    }
+
+    .card-header h3 { 
+        font-size: 1rem; 
+    }
+
+    .timer { 
+        font-size: 2.5rem; 
+    }
+
+    .progress-bar { 
+        width: 100%; 
+    }
+
+    .tasks-table-header, 
+    .task-row { 
+        grid-template-columns: 35px 1fr 60px 40px; 
+        font-size: 0.7rem; 
+    }
+
+    .exams-table-header, 
+    .exam-main { 
+        grid-template-columns: 1fr 60px 50px 40px; 
+        font-size: 0.65rem; 
+    }
+
+    .col-days { 
+        font-size: 0.7rem; 
+        padding: 2px 4px; 
+    }
+
+    .due-badge { 
+        font-size: 0.65rem; 
+        padding: 2px 4px; 
+    }
 }
