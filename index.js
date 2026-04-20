@@ -83,6 +83,50 @@ function updateDateTime(){
 }
 
 
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebar = document.querySelector('.sidebar');
+
+function resetSidebarForDesktop() {
+    if (window.innerWidth > 768) {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        mobileMenuBtn.style.display = 'none';
+    } else {
+        mobileMenuBtn.style.display = 'flex';
+    }
+}
+
+resetSidebarForDesktop();
+window.addEventListener('resize', resetSidebarForDesktop);
+
+mobileMenuBtn.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+        sidebar.classList.toggle('open');
+        sidebarOverlay.classList.toggle('active');
+        mobileMenuBtn.style.display = sidebar.classList.contains('open') ? 'none' : 'flex';
+    }
+});
+
+sidebarOverlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active');
+    if (window.innerWidth <= 768) {
+        mobileMenuBtn.style.display = 'flex';
+    }
+});
+
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+            mobileMenuBtn.style.display = 'flex';
+        }
+    });
+});
+
+
 let tasksBadge = document.querySelector(".tasks-card .badge");
 let tasksList = document.getElementById("dashboardTasks"); 
 let goToTaskPage;
