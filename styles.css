@@ -2096,6 +2096,30 @@ body{
         font-size: 0.6rem; 
     }
 
+    .exams-container .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .exams-container .form-group {
+        width: 100%;
+    }
+
+    .exams-container .form-group input,
+    .exams-container .form-group select {
+        width: 100%;
+    }
+
+    .exams-container .form-actions {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .exams-container .form-actions button {
+        width: 100%;
+    }
+
     .settings-row { 
         flex-direction: column; 
         align-items: center; 
@@ -2215,25 +2239,24 @@ body{
         text-align: center !important;
     }
 
-.major-checkbox {
-    display: flex !important;
-    flex-direction: row !important;
-    text-align: left !important;
-    width: 100%;
-    gap: var(--space-sm);
-}
+    .major-checkbox {
+        display: flex !important;
+        flex-direction: row !important;
+        text-align: left !important;
+        width: 100%;
+        gap: var(--space-sm);
+    }
 
-.major-checkbox::before {
-    content: "Major Course";
-    font-weight: 600;
-    color: var(--secondary-text);
-}
+    .major-checkbox::before {
+        content: "Major Course";
+        font-weight: 600;
+        color: var(--secondary-text);
+    }
 
-.major-checkbox input {
-    width: auto !important;
-    margin: 0 !important;
-}
-
+    .major-checkbox input {
+        width: auto !important;
+        margin: 0 !important;
+    }
 
     .remove-course-btn {
         display: inline-flex !important;
